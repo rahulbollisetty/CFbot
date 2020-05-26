@@ -19,6 +19,3 @@ for i in table.find_all("td", class_ = "id"):
     final_url = url + "/problem/" + a['href'].replace(j, "")
     lst.append(final_url)
     print(problem_name)
-#good now store these links in an array
-# for i in lst:
-#     print(i)
