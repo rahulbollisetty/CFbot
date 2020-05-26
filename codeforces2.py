@@ -1,9 +1,8 @@
 import requests
-
 import re
 from codeforces import lst
 from bs4 import BeautifulSoup
-#print("enter url of problem")
+
 for i in lst:
     url = i
     r = requests.get(url)

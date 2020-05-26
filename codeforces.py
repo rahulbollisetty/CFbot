@@ -10,13 +10,15 @@ html_cont = r.text
 soup = BeautifulSoup(html_cont, 'html.parser')
 table = soup.find('table', class_= "problems")
 lst = []
+problem_name = []
 j = url.replace("https://codeforces.com", "") + "/problem/"
-print(j)
+
 for i in table.find_all("td", class_ = "id"):
     a = i.find('a')
-    b = url + "/problem/" + a['href'].replace(j, "")
-    lst.append(b)
-    print(b)
+    problem_name.append(a['href'].replace(j, ""))
+    final_url = url + "/problem/" + a['href'].replace(j, "")
+    lst.append(final_url)
+    print(problem_name)
 #good now store these links in an array
 # for i in lst:
 #     print(i)
