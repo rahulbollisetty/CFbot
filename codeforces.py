@@ -12,6 +12,7 @@ table = soup.find('table', class_= "problems")
 lst = []
 problem_name = []
 j = url.replace("https://codeforces.com", "") + "/problem/"
+print(j)
 
 for i in table.find_all("td", class_ = "id"):
     a = i.find('a')
