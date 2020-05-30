@@ -65,7 +65,5 @@ for i in lst:
         count += 1
         # print(x)
 
-    # print(str(os.getcwd()))
+
     os.chdir('..')
-    # print(str(os.getcwd()))
-#great now remove whitespaces and store them in a array or so
