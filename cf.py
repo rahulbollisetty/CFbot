@@ -4,11 +4,10 @@ import re
 from codeforces import lst, problem_name,url1
 from bs4 import BeautifulSoup
 import os
+import json
 from change import Utilities
-# importing the cache_directory for default language
-x = Utilities.cache_directory
-print(str(x))
-print("enter the contest id")
+from tqdm import tqdm
+# importing the cache_directory location for default language
 # create a directory for the contest id
 
 cwd = os.getcwd()
@@ -20,8 +19,8 @@ except OSError as error:
 os.chdir(path)
 
 j = 0 #cont for no.of problems
-for i in lst:
-    # creating directoy for each problem
+for i in tqdm(lst):
+    ################# creating directoy for each problem#####################
     cwd = os.getcwd()
     path = os.path.join(cwd, problem_name[j])
     j += 1
@@ -31,14 +30,28 @@ for i in lst:
         print(error)
 
     os.chdir(path)
-
+#################################################################################
     url = i
     r = requests.get(url)
     html_cont = r.text
     # parsing every problem page
     soup = BeautifulSoup(html_cont, 'lxml')
     div = soup.find_all('div', class_ = "input")
-    
+
+
+    ######################### creating default language file#######################################
+    with open(os.path.join(Utilities.cache_directory, 'default.json'), 'r') as f:
+        data = f.read()
+        data = json.loads(data)
+        lan = data.get('default_lang')
+        with open('sol' + '.' + lan, 'w') as sol:
+            sol.write('hello')
+            sol.close()
+        f.close()
+        
+
+    ################################################################
+
     count = 0 #count for number of input
     # finding input div
     for inp in  div:
@@ -52,7 +65,7 @@ for i in lst:
         inputf.write(''.join(x))
         inputf.close()
         count += 1
-        # print(x)
+        
 
     count = 0 #count for number of output
 
@@ -68,7 +81,7 @@ for i in lst:
         outputf.write(''.join(x))
         outputf.close()
         count += 1
-        # print(x)
+        
 
 
     os.chdir('..')
