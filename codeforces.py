@@ -3,9 +3,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-print("enter the contest id")
 url1 = str(input())
-
 url = "https://codeforces.com/contest/" + url1
 r = requests.get(url)
 html_cont = r.text

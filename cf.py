@@ -4,7 +4,10 @@ import re
 from codeforces import lst, problem_name,url1
 from bs4 import BeautifulSoup
 import os
-
+from ch import Utilities
+x = Utilities.cache_directory
+print(str(x))
+print("enter the contest id")
 # create a directory for the contest id
 
 cwd = os.getcwd()
