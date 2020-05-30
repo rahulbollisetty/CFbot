@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import requests
 import re
 from codeforces import lst, problem_name,url1
