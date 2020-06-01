@@ -14,6 +14,9 @@ python3
 ```
 pip3
 ```
+```
+git
+```
 
 ### Installing
 
