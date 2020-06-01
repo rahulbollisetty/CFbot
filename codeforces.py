@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import requests
+import os
 import re
 from bs4 import BeautifulSoup
 print("enter the contest id")
@@ -28,3 +29,12 @@ for i in table.find_all("td", class_ = "id"):
     # storing problem links
     lst.append(b)
     print(problem_name)
+# create a directory for the contest id
+
+cwd = os.getcwd()
+path = os.path.join(cwd, url1)
+try: 
+    os.mkdir(path) 
+except OSError as error: 
+    print(error)    
+os.chdir(path)

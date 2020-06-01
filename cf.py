@@ -5,22 +5,17 @@ from codeforces import lst, problem_name,url1
 from bs4 import BeautifulSoup
 import os
 import json
-from change import Utilities
+from change import Utilities, supported_lang
 from tqdm import tqdm
-# importing the cache_directory location for default language
-# create a directory for the contest id
+from shutil import copyfileobj
+args = Utilities.mainf(supported_lang)
 
-cwd = os.getcwd()
-path = os.path.join(cwd, url1)
-try: 
-    os.mkdir(path) 
-except OSError as error: 
-    print(error)    
-os.chdir(path)
+if args['default_lang']:
+    Utilities.set_constants('default_lang', args['default_lang'])
 
 j = 0 #cont for no.of problems
 for i in tqdm(lst):
-    ################# creating directoy for each problem#####################
+######################################## creating directoy for each problem #####################
     cwd = os.getcwd()
     path = os.path.join(cwd, problem_name[j])
     j += 1
@@ -30,7 +25,8 @@ for i in tqdm(lst):
         print(error)
 
     os.chdir(path)
-#################################################################################
+
+###################################################################################################
     url = i
     r = requests.get(url)
     html_cont = r.text
@@ -39,18 +35,21 @@ for i in tqdm(lst):
     div = soup.find_all('div', class_ = "input")
 
 
-    ######################### creating default language file#######################################
-    with open(os.path.join(Utilities.cache_directory, 'default.json'), 'r') as f:
-        data = f.read()
-        data = json.loads(data)
-        lan = data.get('default_lang')
-        with open('sol' + '.' + lan, 'w') as sol:
-            sol.write('hello')
-            sol.close()
-        f.close()
-        
+############################# creating default language file #######################################
 
-    ################################################################
+
+    with open(os.path.join(Utilities.cache_directory, 'default.json'), 'r') as f:
+        # data = f.read()
+        data = json.load(f)
+        lan = data.get('default_lang')
+        
+        fname = os.path.join('/usr/local/bin/templates',"template." + lan)
+        with open('sol.' + lan, 'w') as sol, open(fname, 'r') as temp:
+            copyfileobj(temp,sol)
+            sol.close()
+            temp.close
+    
+#####################################################################################################
 
     count = 0 #count for number of input
     # finding input div
@@ -82,6 +81,6 @@ for i in tqdm(lst):
         outputf.close()
         count += 1
         
-
+        
 
     os.chdir('..')
