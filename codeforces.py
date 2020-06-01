@@ -28,9 +28,9 @@ for i in table.find_all("td", class_ = "id"):
     b = url + "/problem/" + a['href'].replace(j, "")
     # storing problem links
     lst.append(b)
-    print(problem_name)
 # create a directory for the contest id
-
+print("Creating directory for the contest\n")
+print("Downloading test cases...\n")
 cwd = os.getcwd()
 path = os.path.join(cwd, url1)
 try: 
