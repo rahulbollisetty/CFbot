@@ -1,4 +1,3 @@
-[![HitCount](http://hits.dwyl.com/rahulbollisetty/CFbot.svg)](http://hits.dwyl.com/rahulbollisetty/CFbot)
 # CFbot
 Downloads the test cases from CODEFORCES and adds templates for selected default language(c, cpp, python)
 ## Getting Started
