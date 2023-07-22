@@ -31,7 +31,7 @@ for i in tqdm(lst):
     r = requests.get(url)
     html_cont = r.text
     # parsing every problem page
-    soup = BeautifulSoup(html_cont, 'lxml')
+    soup = BeautifulSoup(html_cont, 'html.parser')
     div = soup.find_all('div', class_ = "input")
 
 
@@ -57,12 +57,20 @@ for i in tqdm(lst):
         
         pre = inp.find('pre')
         inputf = open('input' + str(count) + '.txt', 'w')
-
-        for i in pre.select('br'):
-            i.replace_with('\n')
-        x = pre.text.strip().strip('\n').strip()
-        inputf.write(''.join(x))
-        inputf.close()
+        testLine=[]
+        if pre.find_all('div', class_="test-example-line"):
+            for i in pre.find_all('div', class_="test-example-line"):
+                x = i.text
+                testLine.append(x)
+            inputf.write('\n'.join(testLine))
+            inputf.close()
+            
+        else: 
+            for i in pre.select('br'):
+                i.replace_with('\n')
+            x = pre.text.strip().strip('\n').strip()
+            inputf.write(''.join(x))
+            inputf.close()
         count += 1
         
 
